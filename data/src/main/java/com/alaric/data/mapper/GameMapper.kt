@@ -1,6 +1,7 @@
 package com.alaric.data.mapper
 
 import com.alaric.data.local.GameEntity
+import com.alaric.data.remote.GameDto
 import com.alaric.domain.model.Game
 
 fun GameEntity.toDomain(): Game {
@@ -11,10 +12,11 @@ fun GameEntity.toDomain(): Game {
         coverUrl = coverUrl,
         platforms = platforms,
         genres = genres
+
     )
 }
 
-fun Game.toEntity(isInQueue: Boolean = false): GameEntity {
+fun GameDto.toEntity(isInQueue: Boolean = false): GameEntity {
     return GameEntity(
         id = id,
         title = title,
@@ -25,3 +27,4 @@ fun Game.toEntity(isInQueue: Boolean = false): GameEntity {
         isStoredInQueue = isInQueue
     )
 }
+

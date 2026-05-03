@@ -9,9 +9,8 @@ interface GameApiService {
     @GET("/games")
     suspend fun getTestGames(): List<GameDto>
 
-    // For your eventual Gemini integration
-    data class RecommendationRequest(val prompt: String)
+    // data class RecommendationRequest(val prompt: String)
 
     @POST("/recommend")
-    suspend fun getRecommendations(@Body request: RecommendationRequest): List<GameDto>
+    suspend fun getRecommendations(@Body request: String): List<GameDto>
 }

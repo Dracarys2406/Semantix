@@ -1,7 +1,9 @@
 package com.alaric.data.repository
 
+import android.util.Log
 import com.alaric.data.local.GameDao
 import com.alaric.data.mapper.toDomain
+import com.alaric.data.mapper.toEntity
 import com.alaric.data.remote.GameApiService
 import com.alaric.domain.model.Game
 import com.alaric.domain.repository.GameRepository
@@ -14,11 +16,15 @@ class GameRepositoryImpl @Inject constructor(
     private val dao: GameDao
 ) : GameRepository {
 
-    // The UI observes this Flow. It updates automatically when the DB changes.
+    // The UI observes this Flow and updates when the DB changes.
     override fun observeGames(): Flow<List<Game>> {
         return dao.getAllGames().map { entities ->
             entities.map { it.toDomain() }
         }
+    }
+
+    override fun observeGame(id: Int): Flow<Game?> {
+        return dao.getGameById(id).map { it?.toDomain() }
     }
 
     override suspend fun fetchRecommendations(prompt: String) {
@@ -29,7 +35,7 @@ class GameRepositoryImpl @Inject constructor(
             dao.upsertGames(remoteGames.map { it.toEntity() })
 
         } catch (e: Exception) {
-            // Log error or handle failure
+            Log.d("GAMEREPOSITORY_IMPL", e.message?:"Unknown Error at GameRepositoryImpl")
         }
     }
 }

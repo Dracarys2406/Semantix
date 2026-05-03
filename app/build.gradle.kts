@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 
-    kotlin("plugin.serialization") version "2.0.21"
+    alias(libs.plugins.kotlin.serialization)
+
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
@@ -55,6 +56,7 @@ dependencies {
 
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":app:di"))
 
     // dependency injection
     implementation("com.google.dagger:hilt-android:2.57.1")

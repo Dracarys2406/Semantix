@@ -10,6 +10,9 @@ interface GameDao {
     @Query("SELECT * FROM games")
     fun getAllGames(): Flow<List<GameEntity>>
 
+    @Query("SELECT * FROM games WHERE id = :gameId LIMIT 1")
+    fun getGameById(gameId: Int): Flow<GameEntity?>
+
     @Query("SELECT * FROM games WHERE isStoredInQueue = 1")
     fun getQueue(): Flow<List<GameEntity>>
 
