@@ -17,5 +17,6 @@ data class GameEntity(
     val platforms: List<String>? = null,
     val releaseDate: String? = null,
 
-    val isStoredInQueue: Boolean = false
+    val isStoredInQueue: Boolean = false,
+    val isPlayed : Boolean = false
 )

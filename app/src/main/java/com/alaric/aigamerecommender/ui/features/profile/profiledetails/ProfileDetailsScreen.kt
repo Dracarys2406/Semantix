@@ -1,4 +1,4 @@
-package com.alaric.aigamerecommender.ui.features.queue.queuedetails
+package com.alaric.aigamerecommender.ui.features.profile.profiledetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,15 +31,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.alaric.aigamerecommender.ui.features.search.gamedetails.DetailsIntent
-import com.alaric.aigamerecommender.ui.features.search.gamedetails.DetailsState
+import com.alaric.aigamerecommender.ui.features.queue.queuedetails.QueueDetailsIntent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QueueDetailsScreen(
+fun ProfileDetailsScreen(
     modifier: Modifier = Modifier,
-    state: QueueDetailsState,
-    onIntent: (QueueDetailsIntent) -> Unit,
+    state: ProfileDetailsState,
+    onIntent: (ProfileDetailsIntent) -> Unit,
     onBackClicked: () -> Unit
 ) {
     Scaffold(
@@ -56,7 +55,10 @@ fun QueueDetailsScreen(
         floatingActionButton = {
             if (state.game != null) {
                 ExtendedFloatingActionButton(
-                    onClick = { onIntent(QueueDetailsIntent.OnDeleteFromQueue) }
+                    onClick = {
+                        onIntent(ProfileDetailsIntent.OnDeleteFromLibrary)
+                        onBackClicked()
+                    }
                 ) {
                     Text("Delete")
                 }

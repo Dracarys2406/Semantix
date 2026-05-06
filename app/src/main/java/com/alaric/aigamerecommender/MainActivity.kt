@@ -29,15 +29,11 @@ class MainActivity : ComponentActivity() {
 
         )
         // MOCK seeding database
-        databaseSeeder.seedMockData()
+        //databaseSeeder.seedMockData()
 
         setContent {
             AiGameRecommenderTheme() {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                ) { innerPadding ->
-                    Semantix()
-                }
+                Semantix()
             }
         }
     }

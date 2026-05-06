@@ -1,10 +1,7 @@
-package com.alaric.aigamerecommender.ui.features.queue.queuedetails
+package com.alaric.aigamerecommender.ui.features.profile.profiledetails
 
-import com.alaric.aigamerecommender.ui.features.search.gamedetails.DetailsIntent
-
-interface QueueDetailsIntent {
-    object OnDeleteFromQueue : QueueDetailsIntent
-    object OnMarkFinished : QueueDetailsIntent
-    object OnEditNote : QueueDetailsIntent
+interface ProfileDetailsIntent {
+    object OnDeleteFromLibrary : ProfileDetailsIntent
+    object OnEditNote : ProfileDetailsIntent
 
 }

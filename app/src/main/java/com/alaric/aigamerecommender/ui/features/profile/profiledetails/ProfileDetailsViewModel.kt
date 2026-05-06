@@ -1,9 +1,10 @@
-package com.alaric.aigamerecommender.ui.features.queue.queuedetails
+package com.alaric.aigamerecommender.ui.features.profile.profiledetails
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alaric.domain.usecase.GetGameUseCase
+import com.alaric.domain.usecase.ManageLibraryUseCase
 import com.alaric.domain.usecase.ManageQueueUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -15,16 +16,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QueueDetailsViewModel @Inject constructor(
+class ProfileDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getGameUseCase: GetGameUseCase,
-    private val manageQueueUseCase: ManageQueueUseCase // I'll add this later to handle queue operations
+    private val manageLibraryUseCase: ManageLibraryUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(QueueDetailsState())
+    private val _state = MutableStateFlow(ProfileDetailsState())
     val state = _state.asStateFlow()
 
-    private val _effect = Channel<QueueDetailsEffect>()
+    private val _effect = Channel<ProfileDetailsEffect>()
     val effect = _effect.receiveAsFlow()
 
     private val gameId: Int = checkNotNull(savedStateHandle["gameId"])
@@ -45,16 +46,15 @@ class QueueDetailsViewModel @Inject constructor(
         }
     }
 
-    fun processIntent(intent: QueueDetailsIntent) {
+    fun processIntent(intent: ProfileDetailsIntent) {
         when (intent) {
-            is QueueDetailsIntent.OnDeleteFromQueue -> {
+            is ProfileDetailsIntent.OnDeleteFromLibrary -> {
                 viewModelScope.launch {
-                    manageQueueUseCase.invoke(gameId, false)
-                    _effect.send(QueueDetailsEffect.ShowToast("RemovedFromQueue!"))
+                    manageLibraryUseCase.invoke(gameId, false)
+                    _effect.send(ProfileDetailsEffect.ShowToast("Removed From Library!"))
                 }
             }
-            is QueueDetailsIntent.OnMarkFinished -> {}
-            is QueueDetailsIntent.OnEditNote -> {}
+            is ProfileDetailsIntent.OnEditNote -> {}
         }
     }
 }

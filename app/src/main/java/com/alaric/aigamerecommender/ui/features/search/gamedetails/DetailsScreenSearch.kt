@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreenSearch(
+    modifier: Modifier = Modifier,
     state: DetailsState,
     onIntent: (DetailsIntent) -> Unit,
     onBackClicked: () -> Unit
@@ -53,7 +54,10 @@ fun DetailsScreenSearch(
         floatingActionButton = {
             if (state.game != null) {
                 ExtendedFloatingActionButton(
-                    onClick = { onIntent(DetailsIntent.OnToggleQueueStatus) }
+                    onClick = {
+                        onIntent(DetailsIntent.OnAddToQueue)
+                        onBackClicked()
+                    }
                 ) {
                     Text("Add to Queue")
                 }

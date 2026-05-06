@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alaric.domain.usecase.GetGameUseCase
+import com.alaric.domain.usecase.ManageQueueUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -13,8 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getGameUseCase: GetGameUseCase
-    // private val manageQueueUseCase: ManageQueueUseCase // I'll add this later to handle toggle
+    private val getGameUseCase: GetGameUseCase,
+    private val manageQueueUseCase: ManageQueueUseCase // I'll add this later to handle toggle
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(DetailsState())
@@ -43,10 +44,10 @@ class DetailsViewModel @Inject constructor(
 
     fun processIntent(intent: DetailsIntent) {
         when (intent) {
-            is DetailsIntent.OnToggleQueueStatus -> {
+            is DetailsIntent.OnAddToQueue -> {
                 viewModelScope.launch {
-
-                    _effect.send(DetailsEffect.ShowToast("Queue toggled!"))
+                    manageQueueUseCase.invoke(gameId, true)
+                    _effect.send(DetailsEffect.ShowToast("Added to Queue!"))
                 }
             }
         }

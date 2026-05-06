@@ -78,10 +78,6 @@ fun GameCardSearch(
             Text(text = game.summary?.take(100)?.plus("...") ?: "No summary", style = MaterialTheme.typography.bodySmall)
 
             Spacer(modifier = Modifier.height(8.dp))
-
-            Button(onClick = { onIntent(SearchIntent.OnToggleQueueStatus(game)) }) {
-                Text(if (false /* Replace with actual game queue status later */) "Remove from Queue" else "Add to Queue")
-            }
         }
     }
 }

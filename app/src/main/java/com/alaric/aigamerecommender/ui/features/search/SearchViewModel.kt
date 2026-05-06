@@ -23,7 +23,7 @@ class SearchViewModel @Inject constructor(
     init {
         // we sart observing the database when the ViewModel is created
         viewModelScope.launch {
-            getRecommendationsUseCase.observe().collect { games ->
+            getRecommendationsUseCase.observeSearchGames().collect { games ->
                 // Every time Room changes, this updates the UI state instantly
                 _state.update { it.copy(recommendedGames = games) }
             }
@@ -70,7 +70,6 @@ class SearchViewModel @Inject constructor(
                 // which handles the Ktor fetch and Room insertion.
                 getRecommendationsUseCase(currentQuery)
 
-                // Assuming the UI observes the Room Database flow separately,
                 // or the UseCase returns the success status.
                 _state.update { it.copy(isLoading = false) }
             } catch (e: Exception) {

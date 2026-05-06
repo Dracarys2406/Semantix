@@ -1,5 +1,5 @@
-package com.alaric.aigamerecommender.ui.features.queue.queuedetails
+package com.alaric.aigamerecommender.ui.features.profile.profiledetails
 
-interface QueueDetailsEffect {
-    data class ShowToast(val message: String) : QueueDetailsEffect
+interface ProfileDetailsEffect {
+    data class ShowToast(val message: String) : ProfileDetailsEffect
 }
