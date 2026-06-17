@@ -60,7 +60,7 @@ interface GameDao {
     suspend fun updateQueueAndCleanup(gameId: Int, isQueued: Boolean) {
         updateQueueStatus(gameId, isQueued )
 
-        // Only wipe it if it's not played AND not in queue
+        // We only wipe it if it's not played AND not in queue
         if (!isQueued) {
             deleteIfOrphaned(gameId)
         }

@@ -54,8 +54,6 @@ class ProfileViewModel @Inject constructor(
     private fun triggerEffect(effect: ProfileEffect) {
         viewModelScope.launch {
             _effect.send(effect)
-
-
         }
     }
 }

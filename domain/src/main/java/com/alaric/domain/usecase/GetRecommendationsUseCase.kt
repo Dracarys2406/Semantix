@@ -13,7 +13,7 @@ class GetRecommendationsUseCase @Inject constructor(
         repository.fetchRecommendations(prompt)
     }
 
-    // expose the reactive stream from the local databae
+    // expose the reactive stream from the local database
     fun observeSearchGames(): Flow<List<Game>> {
         return repository.observeSearchGames()
     }
